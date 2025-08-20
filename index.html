@@ -1,133 +1,160 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>كل ما يهمك عن Roblox وPUBG – زر استمرار</title>
-  <meta name="description" content="صفحة معلومات لطيفة عن روبلوكس وببجي مع زر استمرار واضح في المنتصف." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>اختر اللعبة التي تريدها</title>
+  <!-- خط عربي جميل -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1:#0a0f1f; /* space dark */
-      --bg2:#111b3a; /* deep blue */
-      --neon:#7df9ff; /* neon cyan */
-      --vio:#a78bfa;  /* violet */
-      --pink:#ff7dd9; /* pink */
-      --card:#0f1a31cc; /* glass */
-      --text:#e8ecff;
-      --muted:#9fb0ff;
-      --ok:#52ffa8;
+      --bg1:#0b0f1a;
+      --bg2:#10172a;
+      --card:#0f1424cc;
+      --accent:#6ee7ff;
+      --accent2:#8b5cf6;
+      --text:#eaf2ff;
+      --muted:#b7c3e0;
+      --glow:0 0 35px rgba(110,231,255,.25), 0 0 55px rgba(139,92,246,.2);
+      --radius:22px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Tahoma, Arial; color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(255,125,217,.18), transparent 60%),
-        radial-gradient(900px 500px at -10% 100%, rgba(127,249,255,.15), transparent 60%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
-      overflow-x:hidden;
+      margin:0; font-family:"Tajawal",system-ui,Segoe UI,Arial; color:var(--text);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(139,92,246,.25), transparent 55%),
+                  radial-gradient(1000px 500px at 10% 110%, rgba(110,231,255,.18), transparent 55%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
     }
-    .stars, .twinkles{ position:fixed; inset:0; pointer-events:none; z-index:0; background-repeat:repeat; }
-    .stars{ opacity:.8; animation: drift 140s linear infinite;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9) 50%, transparent 55%),
-        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.8) 50%, transparent 55%),
-        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.7) 50%, transparent 55%),
-        radial-gradient(1.2px 1.2px at 90% 60%, rgba(255,255,255,.85) 50%, transparent 55%),
-        radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,.8) 50%, transparent 55%);
-      background-size: 700px 700px, 800px 800px, 600px 600px, 900px 900px, 1000px 1000px;
+    .wrap{
+      min-height:100dvh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:28px 18px 42px;
     }
-    .twinkles{ opacity:.7; mix-blend-mode: screen; animation: twinkle 3.5s ease-in-out infinite alternate;
-      background-image:
-        radial-gradient(1.5px 1.5px at 15% 35%, rgba(255,255,255,.8), transparent 60%),
-        radial-gradient(1.5px 1.5px at 65% 70%, rgba(255,255,255,.8), transparent 60%),
-        radial-gradient(1.5px 1.5px at 80% 15%, rgba(255,255,255,.9), transparent 60%);
-      background-size: 600px 600px, 900px 900px, 700px 700px;
+    .title{
+      font-weight:800; font-size:clamp(22px, 4vw, 34px);
+      letter-spacing:.2px; margin-bottom:22px; text-align:center;
+      background:linear-gradient(90deg, #c0eaff, #ffffff 30%, #cabffd 70%, #9ae6ff);
+      -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 1px 0 rgba(255,255,255,.08));
     }
-    @keyframes drift{from{background-position:0 0}to{background-position:1200px 800px}}
-    @keyframes twinkle{from{opacity:.4; filter: drop-shadow(0 0 2px rgba(255,255,255,.5));}to{opacity:1; filter: drop-shadow(0 0 6px rgba(255,255,255,.9));}}
+    .subtitle{
+      margin:-6px 0 26px; text-align:center; color:var(--muted); font-size:clamp(13px,2.4vw,16px);
+    }
+    .grid{
+      width:min(1150px, 100%); display:grid; gap:18px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    /* بطاقات ريسبونسيف */
+    .col{ grid-column: span 12;}
+    @media (min-width:640px){ .col{ grid-column: span 6; } }
+    @media (min-width:980px){ .col{ grid-column: span 4; } }
 
-    .wrap{ position:relative; z-index:1; display:grid; gap:40px; }
-
-    /* HERO */
-    .hero{ min-height: 100svh; display:grid; place-items:center; padding:24px; }
     .card{
-      width:min(720px, 94vw);
-      background: linear-gradient(135deg, rgba(16,25,52,.6), rgba(16,25,52,.35));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 20px 50px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
-      border-radius:24px; padding:28px; backdrop-filter: blur(12px);
+      position:relative; overflow:hidden; border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: var(--glow), 0 10px 40px rgba(0,0,0,.35);
+      backdrop-filter: blur(7px);
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease, filter .35s ease;
+      isolation:isolate;
     }
-    .badge{ display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--muted);
-      border:1px solid rgba(127,249,255,.3); border-radius:999px; padding:6px 10px;
-      background: linear-gradient(135deg, rgba(127,249,255,.12), rgba(167,139,250,.10)); }
-    h1{ margin:14px 0 10px; font-size:28px; letter-spacing:.4px; }
-    p.lead{ margin:0 0 18px; color:#c9d5ff; line-height:1.8; }
-
-    .btn-primary{
+    .card:hover{ transform: translateY(-6px) scale(1.01); box-shadow: var(--glow), 0 18px 70px rgba(0,0,0,.55); border-color: rgba(255,255,255,.16); }
+    .media{
+      aspect-ratio: 16/10; width:100%; display:block; object-fit:cover; object-position:center;
+      filter:saturate(1.15) contrast(1.05) brightness(1.02);
+      transition: transform .6s ease, filter .4s ease;
+    }
+    .card:hover .media{ transform: scale(1.05); filter:saturate(1.25) contrast(1.08) brightness(1.06); }
+    .overlay{
+      position:absolute; inset:auto 14px 14px 14px; display:flex; flex-direction:column; gap:12px; z-index:2;
+    }
+    .badge{
+      position:absolute; inset:14px auto auto 14px;
+      background: linear-gradient(90deg, rgba(139,92,246,.9), rgba(110,231,255,.9));
+      color:#08111e; font-weight:800; font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.3); box-shadow: 0 4px 16px rgba(0,0,0,.35);
+      letter-spacing:.3px;
+    }
+    .name{
+      align-self:flex-start; margin:0; padding:10px 14px; border-radius:12px;
+      background: rgba(8,16,30,.7); border:1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(6px); font-weight:800; letter-spacing:.3px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .cta{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      width:100%; max-width:540px; height:64px; padding:0 20px; border:0; border-radius:18px;
-      text-decoration:none; cursor:pointer; font-weight:900; font-size:18px; letter-spacing:.2px;
-      background: linear-gradient(90deg, var(--neon), var(--vio)); color:#051018;
-      box-shadow: 0 10px 30px rgba(127,249,255,.25), 0 6px 18px rgba(167,139,250,.18);
-      transition: transform .15s ease, filter .15s ease;
+      padding:14px 18px; width:100%;
+      border-radius:14px; font-weight:800; font-size:15px; letter-spacing:.2px;
+      color:#08111e; text-decoration:none; text-align:center;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border:1px solid rgba(255,255,255,.35);
+      box-shadow: 0 10px 26px rgba(110,231,255,.2), 0 14px 42px rgba(139,92,246,.25);
+      transition: transform .2s ease, box-shadow .25s ease, filter .25s ease;
+      will-change: transform;
     }
-    .btn-primary:hover{ transform: translateY(-1px); filter: saturate(1.1); }
-    .btn-primary:active{ transform: translateY(0); }
-
-    .content{ width:min(900px, 94vw); margin:0 auto 60px; padding:0 24px; line-height:1.95; color:#d5ddff; }
-    .content h2{ color:#e8ecff; font-size:22px; margin:30px 0 12px }
-    .content p{ margin:0 0 14px }
-    .note{ font-size:12px; color:#aab8ff; margin-top:10px }
-
-    .shine{ position:relative; overflow:hidden; border-radius:16px; }
-    .shine::after{ content:""; position:absolute; inset:-200%; background: linear-gradient(120deg, transparent 45%, rgba(255,255,255,.18) 50%, transparent 55%);
-      transform: translateX(-50%); animation: sweep 5s linear infinite; }
-    @keyframes sweep{ 0%{ transform: translateX(-70%) rotate(10deg)} 100%{ transform: translateX(40%) rotate(10deg)} }
-
-    @media (min-width:768px){ .btn-primary{ height:70px; font-size:20px } }
+    .cta:hover{ transform: translateY(-2px); box-shadow: 0 12px 30px rgba(110,231,255,.28), 0 18px 50px rgba(139,92,246,.33); filter:saturate(1.1) }
+    .footer-note{
+      margin-top:26px; color:var(--muted); font-size:12.5px; opacity:.9; text-align:center;
+    }
+    /* طبقة لمعان خفيفة */
+    .shine{
+      position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen;
+      background: radial-gradient(400px 150px at 80% -10%, rgba(255,255,255,.18), transparent 45%),
+                  radial-gradient(300px 140px at 0% 100%, rgba(255,255,255,.07), transparent 50%);
+      opacity:.7;
+    }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
-  <div class="twinkles"></div>
-
   <main class="wrap">
-    <!-- شاشة البداية وفيها الزر الكبير بالمنتصف تمامًا -->
-    <section class="hero">
-      <div class="card">
-        <div class="badge">بوابة الألعاب • Roblox • PUBG • Mobile Gaming</div>
-        <h1>كل اللي يهمك عن Roblox وPUBG والألعاب المشهورة 🎮</h1>
-        <p class="lead">صفحة مخصصة لعشّاق الألعاب على الجوال والتابلت: معلومات سريعة، نصائح أمان، وأحدث التحديات. أهم شيء هنا زر **الاستمرار** في الأسفل—واضح وكبير ومناسب للشاشات الصغيرة.</p>
+    <h1 class="title">اختر اللعبة التي تريدها</h1>
+    <p class="subtitle">.</p>
 
-        <div style="display:grid; place-items:center; margin:18px 0 6px" class="shine">
-          <a class="btn-primary" href="https://areyourealhuman.com/cl/i/kld99l" target="_blank" rel="noopener noreferrer" aria-label="استمرار إلى الصفحة التالية">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 5l7 7-7 7" stroke="#051018" stroke-width="2" stroke-linecap="round"/></svg>
-            اضغط للاستمرار
-          </a>
+    <section class="grid">
+      <!-- بطاقة PUBG -->
+      <article class="col">
+        <div class="card">
+          <span class="badge">PUBG MOBILE</span>
+          <!-- استبدل رابط الصورة أدناه بصورة PUBG التي تفضلها -->
+          <img class="media" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop" alt="PUBG Mobile">
+          <div class="overlay">
+            <h3 class="name">ببجي موبايل</h3>
+            <!-- استبدل # بالرابط الخاص بك -->
+            <a class="cta" href="#" target="_blank" rel="noopener">اضغط فقط</a>
+          </div>
+          <div class="shine"></div>
         </div>
-        <div class="note">ملاحظة: لا نطلب كلمة مرور أو بيانات شخصية. فقط معلومات عامة عن الألعاب وروابط مفيدة.</div>
-      </div>
+      </article>
+
+      <!-- بطاقة Roblox -->
+      <article class="col">
+        <div class="card">
+          <span class="badge">ROBLOX</span>
+          <!-- استبدل رابط الصورة أدناه بصورة Roblox التي تفضلها -->
+          <img class="media" src="https://images.unsplash.com/photo-1611339555312-e607c8352fd7?q=80&w=1600&auto=format&fit=crop" alt="Roblox">
+          <div class="overlay">
+            <h3 class="name">روبلوكس</h3>
+            <a class="cta" href="#" target="_blank" rel="noopener">اضغط فقط</a>
+          </div>
+          <div class="shine"></div>
+        </div>
+      </article>
+
+      <!-- بطاقة Fortnite -->
+      <article class="col">
+        <div class="card">
+          <span class="badge">FORTNITE</span>
+          <!-- استبدل رابط الصورة أدناه بصورة Fortnite التي تفضلها -->
+          <img class="media" src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1600&auto=format&fit=crop" alt="Fortnite">
+          <div class="overlay">
+            <h3 class="name">فورتنايت</h3>
+            <a class="cta" href="#" target="_blank" rel="noopener">اضغط فقط</a>
+          </div>
+          <div class="shine"></div>
+        </div>
+      </article>
     </section>
 
-    <!-- محتوى مطوّل تحت (كلام كثير) -->
-    <section class="content">
-      <h2>Roblox: عالم الإبداع والتصميم</h2>
-      <p>روبلوكس مو مجرد لعبة؛ هي منصة تصنع فيها عوالمك بنفسك. تقدر تبني ماب كامل، تضيف مهام، وتشارك أصحابك. أفضل طريقة تبدأ فيها هي تجربة ألعاب بسيطة وملاحظة كيف صمموا التجربة، وبعدها جرّب تبني شيء صغير بنفسك.</p>
-      <p>نصيحة سريعة: استخدم إعدادات الخصوصية وتحقق من اسمك داخل اللعبة دائمًا، ولا تشارك أي بيانات خارج اللعبة. تذكر أن كثير من السيرفرات العامة فيها لاعبين من كل الأعمار، فانتبه للتشات وأغلق الخاص إذا ضايقك شيء.</p>
-
-      <h2>PUBG Mobile: تكتيك وسرعة رد فعل</h2>
-      <p>ببجي موبايل تعتمد على التركيز وتوزيع الأدوار بين الفريق. جرّب تلعب بأسلوب هادئ أول الدروب، ثم تحرك مع الدائرة بدل الجري العشوائي. سماعة كويسة تفرق بشكل كبير في سماع خطوات الخصوم وتحديد مواقعهم.</p>
-      <p>جرّب إعدادات الجيروسكوب إذا تناسبك—تعطيك تحكم أسرع في التصويب. ولا تنس ضبط الحساسية تدريجيًا بدل تغييرات مفاجئة.</p>
-
-      <h2>ألعاب منتشرة ثانية</h2>
-      <p>من فورتنايت إلى فري فاير وماينكرافت، الفكرة واحدة: العب بذكاء، وخل عندك وقت للراحة. جرب تحديات أسبوعية وخطط بسيطة للأهداف؛ مثلًا: اليوم هدفك 3 مباريات بدون لوت ثقيل، وبكرة تدريب 15 دقيقة على التصويب.</p>
-
-      <h2>السلامة أولًا</h2>
-      <p>إحذر من الروابط العشوائية داخل الديسكورد أو الشات داخل اللعبة. لا تشارك كلمة المرور أبدًا، وتأكد من المصادقة الثنائية لو متاحة. أي صفحة خارجية لازم تكون واضحة المحتوى وموثوقة.</p>
-
-      <p class="note">تذكير: الزر في الأعلى يأخذك لصفحة خارجية. لو ما فتح الرابط، تأكد أن المتصفح يسمح بفتح نوافذ جديدة أو اضغط مطوّل ثم اختر "فتح في تبويب جديد".</p>
-    </section>
+    <p class="footer-note">.</p>
   </main>
 </body>
 </html>
